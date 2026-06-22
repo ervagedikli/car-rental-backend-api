@@ -2,7 +2,7 @@
 
 TeklifimGelsin backend developer task icin Flask, PostgreSQL ve SQLAlchemy ile hazirlanmis basit arac kiralama REST API projesidir.
 
-## Ozellikler
+## Özellikler
 
 - Kullanici kaydi ve Basic Auth ile giris
 - `merchant` ve `user` rolleri
@@ -46,7 +46,7 @@ cunku bu endpointler `POST` istegi bekler. Tarayici adres cubuguna yazildiginda
 `GET` istegi gonderdigi icin `/login` icin 405 Method Not Allowed gorulebilir.
 Bu endpointler Postman, curl veya benzeri bir API client ile test edilmelidir.
 
-## Degerlendiren Kisi Nasil Test Edebilir?
+## Kurulum
 
 1. Docker Desktop'i baslatin.
 
@@ -132,7 +132,7 @@ Kiralama gecmisini goruntuleyin:
 curl -u user1:123456 http://127.0.0.1:5000/rentals/history
 ```
 
-## Ortam Degiskeni
+## Ortam Değişkeni
 
 Varsayilan database URL:
 
@@ -163,7 +163,7 @@ set DATABASE_URL=postgresql://user:password@localhost:5432/db_name
 | PATCH | `/rentals/<id>/return` | User | Araci iade eder ve ucreti hesaplar |
 | GET | `/rentals/history` | User | Kullanici kiralama gecmisini getirir |
 
-## Ornek Akis
+## Örnek Akış
 
 Merchant kaydi:
 
