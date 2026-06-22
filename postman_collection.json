@@ -1,0 +1,309 @@
+{
+  "info": {
+    "name": "Car Rental Backend API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:5000"
+    },
+    {
+      "key": "merchant_username",
+      "value": "merchant1"
+    },
+    {
+      "key": "merchant_password",
+      "value": "123456"
+    },
+    {
+      "key": "user_username",
+      "value": "user1"
+    },
+    {
+      "key": "user_password",
+      "value": "123456"
+    },
+    {
+      "key": "car_id",
+      "value": "1"
+    },
+    {
+      "key": "rental_id",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/health"
+      }
+    },
+    {
+      "name": "Register Merchant",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"{{merchant_username}}\",\n  \"password\": \"{{merchant_password}}\",\n  \"role\": \"merchant\"\n}"
+        },
+        "url": "{{base_url}}/register"
+      }
+    },
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"{{user_username}}\",\n  \"password\": \"{{user_password}}\",\n  \"role\": \"user\"\n}"
+        },
+        "url": "{{base_url}}/register"
+      }
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{user_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{user_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "url": "{{base_url}}/login"
+      }
+    },
+    {
+      "name": "Create Car",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{merchant_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{merchant_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"brand\": \"Toyota\",\n  \"model\": \"Corolla\",\n  \"year\": 2022,\n  \"color\": \"white\",\n  \"daily_price\": 750\n}"
+        },
+        "url": "{{base_url}}/cars"
+      }
+    },
+    {
+      "name": "List Cars",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/cars?status=available&brand=Toyota"
+      }
+    },
+    {
+      "name": "Get Car",
+      "request": {
+        "method": "GET",
+        "url": "{{base_url}}/cars/{{car_id}}"
+      }
+    },
+    {
+      "name": "Update Car",
+      "request": {
+        "method": "PATCH",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{merchant_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{merchant_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"color\": \"black\",\n  \"daily_price\": 800\n}"
+        },
+        "url": "{{base_url}}/cars/{{car_id}}"
+      }
+    },
+    {
+      "name": "Create Rental",
+      "request": {
+        "method": "POST",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{user_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{user_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"car_id\": {{car_id}},\n  \"end_date\": \"2026-06-25T10:00:00Z\"\n}"
+        },
+        "url": "{{base_url}}/rentals"
+      }
+    },
+    {
+      "name": "Extend Rental",
+      "request": {
+        "method": "PATCH",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{user_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{user_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"end_date\": \"2026-06-30T10:00:00Z\"\n}"
+        },
+        "url": "{{base_url}}/rentals/{{rental_id}}/extend"
+      }
+    },
+    {
+      "name": "Return Rental",
+      "request": {
+        "method": "PATCH",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{user_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{user_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "url": "{{base_url}}/rentals/{{rental_id}}/return"
+      }
+    },
+    {
+      "name": "Rental History",
+      "request": {
+        "method": "GET",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{user_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{user_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "url": "{{base_url}}/rentals/history"
+      }
+    },
+    {
+      "name": "Delete Car",
+      "request": {
+        "method": "DELETE",
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "username",
+              "value": "{{merchant_username}}",
+              "type": "string"
+            },
+            {
+              "key": "password",
+              "value": "{{merchant_password}}",
+              "type": "string"
+            }
+          ]
+        },
+        "url": "{{base_url}}/cars/{{car_id}}"
+      }
+    }
+  ]
+}
